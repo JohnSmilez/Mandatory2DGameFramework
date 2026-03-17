@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<GameFrameworkConfig>
+
+	<World>
+		<MaxX>100</MaxX>
+		<MaxY>100</MaxY>
+		<GameDifficulty>Normal</GameDifficulty>
+	</World>
+</GameFrameworkConfig>

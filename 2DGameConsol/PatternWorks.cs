@@ -1,5 +1,7 @@
 ﻿using Mandatory2DGameFramework.Decorator;
 using Mandatory2DGameFramework.model.attack;
+using Mandatory2DGameFramework.model.Creatures;
+using Mandatory2DGameFramework.Observer;
 
 public class PatternWorks
 {
@@ -17,5 +19,19 @@ public class PatternWorks
         // 3. Flere decorators ovenpå hinanden
         IAttackComponent superSword = new DamageBoostDecorator(boostedSword, 5);
         Console.WriteLine($"Super Boosted: {superSword.GetHit()}");
+    }
+    // Dette er en demo for at vise hvordan Observer pattern fungerer i vores spil
+    public class ConsoleCreatureObserver : ICreatureObserver
+    {
+        public void CreatureHit(Creature creature, int damageTaken)
+        {
+            Console.WriteLine($"[Observer] {creature.Name} blev ramt for {damageTaken} damage!");
+            Console.WriteLine($"[Observer] {creature.Name} har nu {creature.Damage.HitPoints} HP tilbage.");
+        }
+
+        public void CreatureDied(Creature creature)
+        {
+            Console.WriteLine($"[Observer] {creature.Name} er død!");
+        }
     }
 }

@@ -2,9 +2,10 @@
 using Mandatory2DGameFramework.model.attack;
 using Mandatory2DGameFramework.model.defence;
 using Mandatory2DGameFramework.model.Strategy;
+using Mandatory2DGameFramework.Observer;
 using Mandatory2DGameFramework.Strategy;
 using Mandatory2DGameFramework.Typer;
-using Mandatory2DGameFramework.worlds;  
+using Mandatory2DGameFramework.worlds;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,18 +17,45 @@ namespace Mandatory2DGameFramework.model.Creatures
     /// Repræsenterer en skabning i spillet.
     /// En creature kan angribe, modtage skade og samle objekter.
     /// </summary>
- 
+
     public class Creature
     {
         public string Name { get; set; }
         public Damage Damage { get; set; }
         public IHitStrategy HitStrategy { get; set; }
 
+        private List<ICreatureObserver> _observers = new List<ICreatureObserver>();
+
 
         // Todo consider how many attack / defence weapons are allowed
-        public List <IAttackComponent>   AttackItems { get; set; } // Bruger IAttackcomponent fra vores decorator
-        public List <DefenceItem>  DefenceItems { get; set; }
+        public List<IAttackComponent> AttackItems { get; set; } // Bruger IAttackcomponent fra vores decorator
+        public List<DefenceItem> DefenceItems { get; set; }
 
+        //Observer pattern implementation
+        //Tilføj observer
+        public void AttachObserver(ICreatureObserver observer)
+        {
+            if (!_observers.Contains(observer))
+                _observers.Add(observer);
+        }
+        //fjern observer
+        public void DetachObserver(ICreatureObserver observer)
+        {
+            _observers.Remove(observer);
+
+        }
+        //notify observers
+        private void NotifyHit(int damageTaken) 
+        {
+            foreach (var observer in _observers)
+                observer.CreatureHit(this, damageTaken);
+        }
+        // Notificer når Creature dør
+        private void NotifyDeath()
+        {
+            foreach (var observer in _observers)
+                observer.CreatureDied(this);
+        }
         public Creature()
         {
             Name = string.Empty;
@@ -46,14 +74,20 @@ namespace Mandatory2DGameFramework.model.Creatures
 
         public void ReceiveHit(int hit)
         {
-            int damage= hit;
-            int totalDefense = DefenceItems.Sum(d => d.ReduceHitPoint);
+            int damage = hit;
+            int totalDefense = (DefenceItems?.Sum(d => d.ReduceHitPoint) ?? 0);
             damage -= totalDefense; // Reducer skaden baseret på creature's forsvar
             if (damage < 0)
             {
                 damage = 0;
             }
-            Damage.TakeDamage(damage);  
+            Damage.TakeDamage(damage);
+
+            // Notify observers
+            NotifyHit(damage);
+
+            if (Damage.HitPoints <= 0)
+                NotifyDeath();
         }
 
         public void Loot(WorldObject obj)
