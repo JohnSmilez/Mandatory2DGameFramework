@@ -28,7 +28,9 @@ namespace Mandatory2DGameFramework.model.Creatures
 
 
         // Todo consider how many attack / defence weapons are allowed
-        public List<IAttackComponent> AttackItems { get; set; } // Bruger IAttackcomponent fra vores decorator
+
+        public AttackComposite AttackItems { get; set; }
+        public int MaxWeight { get; set; } = 50;
         public List<DefenceItem> DefenceItems { get; set; }
 
         //Observer pattern implementation
@@ -62,7 +64,7 @@ namespace Mandatory2DGameFramework.model.Creatures
             Damage = new Damage(100);
             HitStrategy = new BasicHitStrategy(); // default strategy
 
-            AttackItems = new List<IAttackComponent>();
+            AttackItems = new AttackComposite();
             DefenceItems = new List<DefenceItem>();
 
         }
@@ -94,10 +96,17 @@ namespace Mandatory2DGameFramework.model.Creatures
         {
             if (!obj.Lootable) return;
 
-            if (obj is AttackItem attackItem)
-                AttackItems.Add(attackItem);
+            if (obj is IAttackComponent attackItem)
+            {
+                if (AttackItems.GetWeight() + attackItem.GetWeight() <= MaxWeight)
+                {
+                    AttackItems.Add(attackItem);
+                }
+            }
             else if (obj is DefenceItem defenceItem)
+            {
                 DefenceItems.Add(defenceItem);
+            }
         }
 
         public bool IsDead()

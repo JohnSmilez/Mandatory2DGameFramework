@@ -7,12 +7,10 @@ namespace Mandatory2DGameFramework.model.Strategy
     {
         public int CalculateHit(Creature creature)
         {
-            if (creature.AttackItems.Count == 0)
-            {
-
+            if (creature.AttackItems == null)
                 return 1;
-            }
-            return creature.AttackItems.Sum(a => a.GetHit());
+
+            return creature.AttackItems.GetHit();
         }
     }
 }

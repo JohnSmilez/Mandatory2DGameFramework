@@ -14,7 +14,7 @@ namespace Mandatory2DGameFramework.model.attack
     public class AttackItem : WorldObject, IAttackComponent
 
     {
-        public string  Name { get; set; }
+        //public string  Name { get; set; }
         public int Hit { get; set; }
         public int Range { get; set; }
 
@@ -30,6 +30,10 @@ namespace Mandatory2DGameFramework.model.attack
             return Hit;
         }
 
+        public virtual int GetWeight()
+        {
+            return 1; // Standard vægt for et attack item, kan ændres i subklasser
+        }
         public override string ToString()
         {
             return $"{{{nameof(Name)}={Name}, {nameof(Hit)}={Hit.ToString()}, {nameof(Range)}={Range.ToString()}}}";

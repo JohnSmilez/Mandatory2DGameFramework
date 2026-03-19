@@ -43,8 +43,14 @@ namespace Mandatory2DGameFramework.Typer
             }
             HitPoints = hitPoints;
         }
-    
-    public void TakeDamage(int damage)
+
+        //Operator overloading for at kunne lægge to Damage objekter sammen
+        public static Damage operator +(Damage d1, Damage d2)
+        {
+            return new Damage(d1.HitPoints + d2.HitPoints);
+        }
+
+        public void TakeDamage(int damage)
         {
             if (damage < 0)
             {

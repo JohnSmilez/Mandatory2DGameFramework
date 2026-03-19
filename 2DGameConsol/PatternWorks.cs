@@ -34,4 +34,25 @@ public class PatternWorks
             Console.WriteLine($"[Observer] {creature.Name} er død!");
         }
     }
+
+    //Dette er en demo for at vise hvordan Composite pattern fungerer i vores spil
+    public void DemoComposite()
+    {
+        Console.WriteLine("===== Composite Demo =====");
+
+        // Opret våben
+        IAttackComponent dagger = new AttackItem { Name = "Dagger", Hit = 10 };
+        IAttackComponent axe = new AttackItem { Name = "Axe", Hit = 15 };
+
+        // Lav en composite
+        AttackComposite composite = new AttackComposite();
+        composite.Add(dagger);
+        composite.Add(axe);
+
+        Console.WriteLine($"Sword damage: {dagger.GetHit()}");
+        Console.WriteLine($"Axe damage: {axe.GetHit()}");
+
+        Console.WriteLine($"Composite total damage: {composite.GetHit()}");
+        Console.WriteLine($"Composite total weight: {composite.GetWeight()}");
+    }
 }

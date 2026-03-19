@@ -30,13 +30,18 @@ namespace Mandatory2DGameFramework.Configuration
             {
                 MaxY = int.Parse(maxYNode.InnerText);
             }
-            XmlNode? difficultyNode = cfg.DocumentElement.SelectSingleNode("World/Difficulty");
+            XmlNode? difficultyNode = cfg.DocumentElement.SelectSingleNode("World/GameDifficulty");
 
             if (difficultyNode != null)
             {
-                // parse string til enum
-                if (Enum.TryParse(difficultyNode.InnerText, true, out GameDifficulty diff))
-                    Difficulty = diff;
+                string value = difficultyNode.InnerText.ToLower();
+
+                if (value == "easy")
+                    Difficulty = GameDifficulty.Easy;
+                else if (value == "normal")
+                    Difficulty = GameDifficulty.Medium;
+                else if (value == "hard")
+                    Difficulty = GameDifficulty.Hard;
                 else
                     Difficulty = GameDifficulty.Medium; // default
             }

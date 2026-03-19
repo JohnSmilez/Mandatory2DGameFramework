@@ -8,15 +8,19 @@ namespace Mandatory2DGameFramework.Decorator
 {
     public abstract class AttackDecorator : IAttackComponent
     {
-        private readonly IAttackComponent _Attackcomponent;
+        private readonly IAttackComponent _attackComponent;
 
         public AttackDecorator(IAttackComponent attackComponent)
         {
-            _Attackcomponent = attackComponent;
+            _attackComponent = attackComponent;
         }
         public virtual int GetHit()
         {
-            return _Attackcomponent.GetHit();
+            return _attackComponent.GetHit();
+        }
+        public virtual int GetWeight()
+        {
+            return _attackComponent.GetWeight();
         }
 
 
