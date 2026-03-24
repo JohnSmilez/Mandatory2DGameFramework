@@ -12,4 +12,8 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Doxygen\" />
+  </ItemGroup>
+
 </Project>

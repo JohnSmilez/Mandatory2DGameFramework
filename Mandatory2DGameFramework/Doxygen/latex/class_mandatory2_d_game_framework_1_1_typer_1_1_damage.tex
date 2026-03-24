@@ -1,0 +1,42 @@
+\doxysection{Mandatory2\+DGame\+Framework.\+Typer.\+Damage Class Reference}
+\hypertarget{class_mandatory2_d_game_framework_1_1_typer_1_1_damage}{}\label{class_mandatory2_d_game_framework_1_1_typer_1_1_damage}\index{Mandatory2DGameFramework.Typer.Damage@{Mandatory2DGameFramework.Typer.Damage}}
+
+
+S -\/ Single Responsibility Principle (SRP) • Klassen har ét ansvar:\+ at håndtere hit points • Hver metode har ét formål.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1_typer_1_1_damage_ab71c8b6500c83675b5964fe79872ce6e}\label{class_mandatory2_d_game_framework_1_1_typer_1_1_damage_ab71c8b6500c83675b5964fe79872ce6e} 
+{\bfseries Damage} (int hit\+Points)
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1_typer_1_1_damage_a363ac3b20f9c0ff8b468f45f79eaee73}\label{class_mandatory2_d_game_framework_1_1_typer_1_1_damage_a363ac3b20f9c0ff8b468f45f79eaee73} 
+void {\bfseries Take\+Damage} (int damage)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1_typer_1_1_damage_a3102889216efc227ecd90ad0b1f9552e}\label{class_mandatory2_d_game_framework_1_1_typer_1_1_damage_a3102889216efc227ecd90ad0b1f9552e} 
+static Damage {\bfseries operator+} (Damage d1, Damage d2)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1_typer_1_1_damage_a43bc2558d06b7d8b1be71e41bc1912ec}\label{class_mandatory2_d_game_framework_1_1_typer_1_1_damage_a43bc2558d06b7d8b1be71e41bc1912ec} 
+int {\bfseries Hit\+Points}\hspace{0.3cm}{\ttfamily  \+[get]\+}
+\begin{DoxyCompactList}\small\item\em O -\/ Open/\+\+Closed Principle (OCP) • Lukket for modifikation (f.\+eks. private setter, validering) • Åben for udvidelse (kan arves, tilføje events/\+logging senere). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+S -\/ Single Responsibility Principle (SRP) • Klassen har ét ansvar:\+ at håndtere hit points • Hver metode har ét formål. 
+
+/\+/\+/\+
+
+L -\/ Liskov Substitution Principle (LSP) • Validering sikrer, at alle Damage-\/objekter opfører sig korrekt • Objektet er altid i en valid state
+
+D -\/ Dependency Inversion Principle (DIP) • Klassen har ingen afhængigheder til andre klasser • Bruger kun primitives (f.\+eks. int) 
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+C:\+/\+\+Users/\+\+Harun/\+\+Downloads/\+\+Mandatory2\+DGame\+Framework/\+\+Mandatory2\+DGame\+Framework/\+\+Mandatory2\+DGame\+Framework/\+\+Typer/\+Damage.\+cs\end{DoxyCompactItemize}

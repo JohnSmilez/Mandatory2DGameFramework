@@ -1,0 +1,60 @@
+\doxysection{Mandatory2\+DGame\+Framework.\+model.\+Creatures.\+Creature Class Reference}
+\hypertarget{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature}{}\label{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature}\index{Mandatory2DGameFramework.model.Creatures.Creature@{Mandatory2DGameFramework.model.Creatures.Creature}}
+
+
+Repræsenterer en skabning i spillet. En creature kan angribe, modtage skade og samle objekter.  
+
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a1f072af2a39e6ea4a54028859d689e0a}\label{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a1f072af2a39e6ea4a54028859d689e0a} 
+void {\bfseries Attach\+Observer} (\doxymbox{\hyperlink{interface_mandatory2_d_game_framework_1_1_observer_1_1_i_creature_observer}{ICreature\+Observer}} observer)
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a6e20c960d466447cfafd42a86f500618}\label{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a6e20c960d466447cfafd42a86f500618} 
+void {\bfseries Detach\+Observer} (\doxymbox{\hyperlink{interface_mandatory2_d_game_framework_1_1_observer_1_1_i_creature_observer}{ICreature\+Observer}} observer)
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a277be6ca65929cc731fae77c2ba86ef0}\label{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a277be6ca65929cc731fae77c2ba86ef0} 
+int {\bfseries Hit} ()
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a19351d6809ba71c537110db081af8ba7}\label{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a19351d6809ba71c537110db081af8ba7} 
+void {\bfseries Receive\+Hit} (int hit)
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a47e1a4402967f3116f3cae07d6beb9d0}\label{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a47e1a4402967f3116f3cae07d6beb9d0} 
+void {\bfseries Loot} (\doxymbox{\hyperlink{class_mandatory2_d_game_framework_1_1worlds_1_1_world_object}{World\+Object}} obj)
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_af00559ddc4e6962bd167ce3bec362c13}\label{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_af00559ddc4e6962bd167ce3bec362c13} 
+bool {\bfseries Is\+Dead} ()
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a45be34786ef3833ecafe9f62d2066fd6}\label{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a45be34786ef3833ecafe9f62d2066fd6} 
+override string {\bfseries To\+String} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a1e56a1e544497505b38952a4ded40ad0}\label{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a1e56a1e544497505b38952a4ded40ad0} 
+string {\bfseries Name}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_ad7c175a2a01ab1826d0a5d04d929c8a4}\label{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_ad7c175a2a01ab1826d0a5d04d929c8a4} 
+Damage {\bfseries Damage}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a8987aaaf370dc9e59750b043e4b16253}\label{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a8987aaaf370dc9e59750b043e4b16253} 
+\doxymbox{\hyperlink{interface_mandatory2_d_game_framework_1_1_strategy_1_1_i_hit_strategy}{IHit\+Strategy}} {\bfseries Hit\+Strategy}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a3e71a36d37844bc74a08f5a31437db51}\label{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a3e71a36d37844bc74a08f5a31437db51} 
+\doxymbox{\hyperlink{class_mandatory2_d_game_framework_1_1model_1_1attack_1_1_attack_composite}{Attack\+Composite}} {\bfseries Attack\+Items}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a19b782652dc34ad72cc7f6fbc1cb2776}\label{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_a19b782652dc34ad72cc7f6fbc1cb2776} 
+int {\bfseries Max\+Weight} = 50\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\item 
+\Hypertarget{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_ae1950b6d4c3efcad1efbd5931ea604bd}\label{class_mandatory2_d_game_framework_1_1model_1_1_creatures_1_1_creature_ae1950b6d4c3efcad1efbd5931ea604bd} 
+List$<$ \doxymbox{\hyperlink{class_mandatory2_d_game_framework_1_1model_1_1defence_1_1_defence_item}{Defence\+Item}} $>$ {\bfseries Defence\+Items}\hspace{0.3cm}{\ttfamily  \+[get, set]\+}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Repræsenterer en skabning i spillet. En creature kan angribe, modtage skade og samle objekter. 
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+C:\+/\+\+Users/\+\+Harun/\+\+Downloads/\+\+Mandatory2\+DGame\+Framework/\+\+Mandatory2\+DGame\+Framework/\+\+Mandatory2\+DGame\+Framework/\+model/\+\+Creatures/\+Creature.\+cs\end{DoxyCompactItemize}
