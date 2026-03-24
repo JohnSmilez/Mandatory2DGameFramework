@@ -5,7 +5,7 @@ using Mandatory2DGameFramework.Observer;
 
 public class PatternWorks
 {
-    // Dette er en demo for at vise hvordan Decorator pattern fungerer i vores spil
+    // Dette er en demo for at vise hvordan DECORATOR pattern fungerer i vores spil
     public void DemoDecorator()
     {
         // 1. Normal attack item
@@ -20,7 +20,7 @@ public class PatternWorks
         IAttackComponent superSword = new DamageBoostDecorator(boostedSword, 5);
         Console.WriteLine($"Super Boosted: {superSword.GetHit()}");
     }
-    // Dette er en demo for at vise hvordan Observer pattern fungerer i vores spil
+    // Dette er en demo for at vise hvordan OBBSERVER pattern fungerer i vores spil
     public class ConsoleCreatureObserver : ICreatureObserver
     {
         public void CreatureHit(Creature creature, int damageTaken)
@@ -35,7 +35,7 @@ public class PatternWorks
         }
     }
 
-    //Dette er en demo for at vise hvordan Composite pattern fungerer i vores spil
+    //Dette er en demo for at vise hvordan COMPOSITE pattern fungerer i vores spil
     public void DemoComposite()
     {
         Console.WriteLine("===== Composite Demo =====");

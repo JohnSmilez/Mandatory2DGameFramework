@@ -49,11 +49,11 @@ class Program
         IAttackComponent boostedSword = new DamageBoostDecorator(sword, 5);
         Console.WriteLine($"Boosted damage: {boostedSword.GetHit()}");
 
-        // ===== TEST 3: PatternWorks demo =====
+      // PatternWorks decorator demo =====
         PatternWorks pw = new PatternWorks(); // vi laver en instans af PatternWorks for at kunne kalde demo-metoderne
         pw.DemoDecorator();
 
-        //===== TEST 4: Operator Overload ===== // ÆNDRER I UGE 15 når han viser sit
+        //===== TEST 3: Operator Overload ===== // ÆNDRER I UGE 15 når han viser sit
         Console.WriteLine();
         Console.WriteLine("===== TEST 5: Operator Overload =====");
 
@@ -68,12 +68,12 @@ class Program
         Console.WriteLine($"Damage 2: {d2.HitPoints}");
         Console.WriteLine($"Total Damage: {total.HitPoints}");
 
-        // ===== TEST 5: Composite =====
+        // ===== TEST 4: Composite =====
         Console.WriteLine();
         Console.WriteLine("===== TEST 6: Composite ====="); // Composite bruges til at samle flere AttackItems til ét samlet våben, så man kan behandle dem som én enhed.
         pw.DemoComposite();
 
-        // ===== TEST 6: XML Configuration =====
+        // ===== TEST 5: XML Configuration =====
         Console.WriteLine();
         Console.WriteLine("===== TEST Af XML =====");
 
