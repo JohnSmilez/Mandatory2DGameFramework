@@ -8,7 +8,7 @@ using System;
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main(string[] args) // TEST PLATFORM
     {
         // ===== TEST 1: Kamp =====
         Creature orc = new Creature { Name = "Orc" };
@@ -18,15 +18,15 @@ class Program
         knight.Loot(new DefenceItem { Name = "Shield", ReduceHitPoint = 5, Lootable = true });
 
         // ===== Observer test setup =====
-        var observer = new PatternWorks.ConsoleCreatureObserver();
-        knight.AttachObserver(observer);
+        var observer = new PatternWorks.ConsoleCreatureObserver(); // bruger testobserver-klassen fra PatternWorks til at følge med i kampens forløb
+        knight.AttachObserver(observer); // Observer bliver kaldt og er du attached vores knight
         orc.AttachObserver(observer); // valgfrit, hvis du vil følge Orcs status
 
         Console.WriteLine("KAMP STARTER");
         Console.WriteLine($"Knight HP: {knight.Damage.HitPoints}");
         Console.WriteLine();
 
-        while (!knight.IsDead())
+        while (!knight.IsDead()) // 
         {
             int damage = orc.Hit();
             Console.WriteLine($"Orc slår med {damage} damage");
@@ -36,11 +36,13 @@ class Program
 
             Console.WriteLine($"Knight HP nu: {knight.Damage.HitPoints}");
             Console.WriteLine();
-        }
+        } 
 
         Console.WriteLine("Knight er død!");
         Console.WriteLine("KAMP SLUTTER");
+        knight.DetachObserver(observer); // vi kalder detach metoden og fjerner oberver, da knight er død
         Console.WriteLine();
+
 
         // ===== TEST 2: Decorator =====
 
@@ -49,6 +51,7 @@ class Program
         IAttackComponent boostedSword = new DamageBoostDecorator(sword, 5);
         Console.WriteLine($"Boosted damage: {boostedSword.GetHit()}");
 
+        Console.WriteLine("Test af patternworks demo. Almindelig, Boosted og superboost");
       // PatternWorks decorator demo =====
         PatternWorks pw = new PatternWorks(); // vi laver en instans af PatternWorks for at kunne kalde demo-metoderne
         pw.DemoDecorator();
