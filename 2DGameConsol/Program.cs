@@ -13,6 +13,7 @@ class Program
         // ===== TEST 1: Kamp =====
         Creature orc = new Creature { Name = "Orc" };
         Creature knight = new Creature { Name = "Knight" };
+        
 
         orc.Loot(new AttackItem { Name = "Sword", Hit = 30, Lootable = true });
         knight.Loot(new DefenceItem { Name = "Shield", ReduceHitPoint = 5, Lootable = true });
@@ -58,7 +59,7 @@ class Program
 
         //===== TEST 3: Operator Overload ===== // ÆNDRER I UGE 15 når han viser sit
         Console.WriteLine();
-        Console.WriteLine("===== TEST 5: Operator Overload =====");
+        Console.WriteLine("===== TEST 4: Operator Overload =====");
 
         Damage d1 = new Damage(20);
         Damage d2 = new Damage(30);
@@ -73,7 +74,7 @@ class Program
 
         // ===== TEST 4: Composite =====
         Console.WriteLine();
-        Console.WriteLine("===== TEST 6: Composite ====="); // Composite bruges til at samle flere AttackItems til ét samlet våben, så man kan behandle dem som én enhed.
+        Console.WriteLine("===== TEST 5: Composite ====="); // Composite bruges til at samle flere AttackItems til ét samlet våben, så man kan behandle dem som én enhed.
         pw.DemoComposite();
 
         // ===== TEST 5: XML Configuration =====
