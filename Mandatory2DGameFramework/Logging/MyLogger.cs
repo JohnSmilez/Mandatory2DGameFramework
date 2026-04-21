@@ -20,8 +20,8 @@ namespace Mandatory2DGameFramework.Logging
         // ===== CONSTRUCTOR =====
         private MyLogger()
         {
-            _traceSource = new TraceSource("GameLog", SourceLevels.All);
-            _switch = new SourceSwitch("LogSwitch", SourceLevels.All.ToString());
+            _traceSource = new TraceSource("GameLog", SourceLevels.All); //Håndtere output
+            _switch = new SourceSwitch("LogSwitch", SourceLevels.All.ToString()); // hvad der må logges
             _traceSource.Switch = _switch;
 
             _listeners = new List<TraceListener>();

@@ -16,7 +16,7 @@ namespace Mandatory2DGameFramework.model.Creatures
     {
         public string Name { get; set; }
         public Damage Damage { get; set; }
-        public IHitStrategy HitStrategy { get; set; }
+        public IHitStrategy HitStrategy { get; set; } // manual injection
 
         private List<ICreatureObserver> _observers = new List<ICreatureObserver>();
 
@@ -74,7 +74,7 @@ namespace Mandatory2DGameFramework.model.Creatures
 
         // ================= TEMPLATE METHOD =================
 
-        public void ReceiveHit(int hit)
+        public void ReceiveHit(int hit) //template metode
         {
             int damage = CalculateDamage(hit);
 
@@ -93,7 +93,7 @@ namespace Mandatory2DGameFramework.model.Creatures
 
             return damage < 0 ? 0 : damage;
         }
-
+        // kaldes i template recieveHit
         protected virtual void ApplyDamage(int damage)
         {
             Damage.TakeDamage(damage);

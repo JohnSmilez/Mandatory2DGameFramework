@@ -7,9 +7,9 @@ using Mandatory2DGameFramework.Observer;
 public class PatternWorks
 {
     // ===== DECORATOR =====
-    public void DemoDecorator()
+    public void DemoDecorator() // tilføjer ekstra funktionalitet til ét objekt uden at ændre klassen.
     {
-        Console.WriteLine("===== Decorator Demo =====");
+        Console.WriteLine("===== Decorator Demo ====="); 
 
         IAttackComponent sword = new AttackItem { Name = "Sword", Hit = 10 };
         Console.WriteLine($"Normal: {sword.GetHit()}");
@@ -37,7 +37,7 @@ public class PatternWorks
     }
 
     // ===== COMPOSITE =====
-    public void DemoComposite()
+    public void DemoComposite() // Behandler flere objekter sammen som en enkelt enhed
     {
         Console.WriteLine("===== Composite Demo =====");
 
@@ -56,11 +56,11 @@ public class PatternWorks
     }
 
     // ===== TEMPLATE + STRATEGY + OBSERVER =====
-    public void DemoCreatureCombat()
+    public void DemoCreatureCombat()    
     {
         Console.WriteLine("===== Creature Combat Demo =====");
 
-        // Bruger concrete classes
+        // Bruger  subclasses
         Creature orc = new BasicCreature { Name = "Orc" };
         Creature knight = new KnightCreature { Name = "Knight" };
 

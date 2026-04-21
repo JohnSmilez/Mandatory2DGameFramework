@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Mandatory2DGameFramework.Strategy
 {
     /// <summary>
-    /// “I” i SOLID: Interface Segregation Principle – klasser skal kun implementere interfaces de bruger.
+    /// “I” i SOLID: Interface Segregation Principle – klasser skal kun implementere interfaces de bruge o gsimpelt
     /// </summary>
     public interface IHitStrategy
     {
