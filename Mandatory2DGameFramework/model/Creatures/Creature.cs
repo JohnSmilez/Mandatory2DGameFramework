@@ -1,4 +1,5 @@
-﻿using Mandatory2DGameFramework.Decorator;
+﻿using Mandatory2DGameFramework.Logging;
+using Mandatory2DGameFramework.Decorator;
 using Mandatory2DGameFramework.model.attack;
 using Mandatory2DGameFramework.model.defence;
 using Mandatory2DGameFramework.model.Strategy;
@@ -8,17 +9,10 @@ using Mandatory2DGameFramework.Typer;
 using Mandatory2DGameFramework.worlds;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Mandatory2DGameFramework.model.Creatures
 {
-    /// <summary>
-    /// Repræsenterer en skabning i spillet.
-    /// En creature kan angribe, modtage skade og samle objekter.
-    /// </summary>
-
-    public class Creature
+    public abstract class Creature
     {
         public string Name { get; set; }
         public Damage Damage { get; set; }
@@ -26,71 +20,100 @@ namespace Mandatory2DGameFramework.model.Creatures
 
         private List<ICreatureObserver> _observers = new List<ICreatureObserver>();
 
-
-        // Todo consider how many attack / defence weapons are allowed
-
         public AttackComposite AttackItems { get; set; }
         public int MaxWeight { get; set; } = 50;
         public List<DefenceItem> DefenceItems { get; set; }
 
-        //Observer pattern implementation
-        //Tilføj observer
+        // ================= CONSTRUCTOR =================
+
+        public Creature()
+        {
+            Name = string.Empty;
+            Damage = new Damage(100);
+            HitStrategy = new BasicHitStrategy();
+
+            AttackItems = new AttackComposite();
+            DefenceItems = new List<DefenceItem>();
+        }
+
+        // ================= OBSERVER =================
+
         public void AttachObserver(ICreatureObserver observer)
         {
             if (!_observers.Contains(observer))
                 _observers.Add(observer);
         }
-        //fjern observer
+
         public void DetachObserver(ICreatureObserver observer)
         {
             _observers.Remove(observer);
-
         }
-        //notify observers
-        private void NotifyHit(int damageTaken) 
+
+        private void NotifyHit(int damageTaken)
         {
             foreach (var observer in _observers)
                 observer.CreatureHit(this, damageTaken);
         }
-        // Notificer når Creature dør
+
         private void NotifyDeath()
         {
             foreach (var observer in _observers)
                 observer.CreatureDied(this);
         }
-        public Creature()
-        {
-            Name = string.Empty;
-            Damage = new Damage(100);
-            HitStrategy = new BasicHitStrategy(); // default strategy
 
-            AttackItems = new AttackComposite();
-            DefenceItems = new List<DefenceItem>();
-
-        }
+        // ================= STRATEGY =================
 
         public int Hit()
         {
-            return HitStrategy.CalculateHit(this); //Brug af strategy pattern for at beregne hit baseret på creature's state
+            int hit = HitStrategy.CalculateHit(this);
+
+            MyLogger.Instance.Log($"{Name} attacks with {hit}");
+
+            return hit;
         }
+
+        // ================= TEMPLATE METHOD =================
 
         public void ReceiveHit(int hit)
         {
-            int damage = hit;
-            int totalDefense = (DefenceItems?.Sum(d => d.ReduceHitPoint) ?? 0);
-            damage -= totalDefense; // Reducer skaden baseret på creature's forsvar
-            if (damage < 0)
-            {
-                damage = 0;
-            }
+            int damage = CalculateDamage(hit);
+
+            ApplyDamage(damage);
+            AfterHit(damage);
+
+            if (IsDead())
+                OnDeath();
+        }
+
+        protected virtual int CalculateDamage(int hit)
+        {
+            int totalDefense = DefenceItems?.Sum(d => d.ReduceHitPoint) ?? 0;
+
+            int damage = hit - totalDefense;
+
+            return damage < 0 ? 0 : damage;
+        }
+
+        protected virtual void ApplyDamage(int damage)
+        {
             Damage.TakeDamage(damage);
 
-            // Notify observers
-            NotifyHit(damage);
-
-            if (Damage.HitPoints <= 0)
-                NotifyDeath();
+            MyLogger.Instance.LogDamage($"{Name} takes {damage} damage. HP: {Damage.HitPoints}");
         }
+
+        protected virtual void AfterHit(int damage)
+        {
+            NotifyHit(damage);
+        }
+
+        protected virtual void OnDeath()
+        {
+            NotifyDeath();
+
+            MyLogger.Instance.LogDeath($"{Name} died");
+        }
+
+        // ================= LOOT =================
 
         public void Loot(WorldObject obj)
         {
@@ -101,11 +124,15 @@ namespace Mandatory2DGameFramework.model.Creatures
                 if (AttackItems.GetWeight() + attackItem.GetWeight() <= MaxWeight)
                 {
                     AttackItems.Add(attackItem);
+
+                    MyLogger.Instance.Log($"{Name} picked up weapon: {attackItem}");
                 }
             }
             else if (obj is DefenceItem defenceItem)
             {
                 DefenceItems.Add(defenceItem);
+
+                MyLogger.Instance.Log($"{Name} picked up defence: {defenceItem.Name}");
             }
         }
 
@@ -114,11 +141,9 @@ namespace Mandatory2DGameFramework.model.Creatures
             return Damage.HitPoints <= 0;
         }
 
-
-
         public override string ToString()
         {
-            return $"{{{nameof(Name)}={Name}, {nameof(Damage)}={Damage.ToString()}, {nameof(AttackItems)}={AttackItems}, {nameof(DefenceItems)}={DefenceItems}}}";
+            return $"{{Name={Name}, HP={Damage.HitPoints}}}";
         }
     }
 }

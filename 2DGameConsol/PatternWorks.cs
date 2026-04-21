@@ -1,26 +1,27 @@
 ﻿using Mandatory2DGameFramework.Decorator;
 using Mandatory2DGameFramework.model.attack;
 using Mandatory2DGameFramework.model.Creatures;
+using Mandatory2DGameFramework.model.defence;
 using Mandatory2DGameFramework.Observer;
 
 public class PatternWorks
 {
-    // Dette er en demo for at vise hvordan DECORATOR pattern fungerer i vores spil
+    // ===== DECORATOR =====
     public void DemoDecorator()
     {
-        // 1. Normal attack item
+        Console.WriteLine("===== Decorator Demo =====");
+
         IAttackComponent sword = new AttackItem { Name = "Sword", Hit = 10 };
         Console.WriteLine($"Normal: {sword.GetHit()}");
 
-        // 2. Med damage boost decorator
         IAttackComponent boostedSword = new DamageBoostDecorator(sword, 5);
         Console.WriteLine($"Boosted: {boostedSword.GetHit()}");
 
-        // 3. Flere decorators ovenpå hinanden
         IAttackComponent superSword = new DamageBoostDecorator(boostedSword, 5);
         Console.WriteLine($"Super Boosted: {superSword.GetHit()}");
     }
-    // Dette er en demo for at vise hvordan OBBSERVER pattern fungerer i vores spil
+
+    // ===== OBSERVER =====
     public class ConsoleCreatureObserver : ICreatureObserver
     {
         public void CreatureHit(Creature creature, int damageTaken)
@@ -35,24 +36,51 @@ public class PatternWorks
         }
     }
 
-    //Dette er en demo for at vise hvordan COMPOSITE pattern fungerer i vores spil
+    // ===== COMPOSITE =====
     public void DemoComposite()
     {
         Console.WriteLine("===== Composite Demo =====");
 
-        // Opret våben
         IAttackComponent dagger = new AttackItem { Name = "Dagger", Hit = 10 };
         IAttackComponent axe = new AttackItem { Name = "Axe", Hit = 15 };
 
-        // Lav en composite
         AttackComposite composite = new AttackComposite();
         composite.Add(dagger);
         composite.Add(axe);
 
-        Console.WriteLine($"Sword damage: {dagger.GetHit()}");
+        Console.WriteLine($"Dagger damage: {dagger.GetHit()}");
         Console.WriteLine($"Axe damage: {axe.GetHit()}");
 
         Console.WriteLine($"Composite total damage: {composite.GetHit()}");
         Console.WriteLine($"Composite total weight: {composite.GetWeight()}");
+    }
+
+    // ===== TEMPLATE + STRATEGY + OBSERVER =====
+    public void DemoCreatureCombat()
+    {
+        Console.WriteLine("===== Creature Combat Demo =====");
+
+        // Bruger concrete classes
+        Creature orc = new BasicCreature { Name = "Orc" };
+        Creature knight = new KnightCreature { Name = "Knight" };
+
+        // Orc får våben (Composite + Strategy)
+        orc.Loot(new AttackItem { Name = "Sword", Hit = 20, Lootable = true });
+
+        //  Knight får defence
+        knight.Loot(new DefenceItem { Name = "Shield", ReduceHitPoint = 5, Lootable = true });
+
+        // Observer
+        var observer = new ConsoleCreatureObserver();
+        orc.AttachObserver(observer);
+        knight.AttachObserver(observer);
+
+        // Kamp
+        int damage = orc.Hit();
+        Console.WriteLine($"Orc slår Knight med {damage} damage");
+
+        knight.ReceiveHit(damage);
+
+        Console.WriteLine($"Knight HP efter slag: {knight.Damage.HitPoints}");
     }
 }

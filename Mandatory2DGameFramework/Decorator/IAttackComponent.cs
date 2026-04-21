@@ -9,6 +9,6 @@ namespace Mandatory2DGameFramework.Decorator
     public interface IAttackComponent
     {
         int GetHit();
-        int GetWeight(); // Tilføjet for at kunne beregne vægt af attack items
+        int GetWeight(); // Tilføjet for at kunne beregne vægt af attack itemsf
     }
 }
